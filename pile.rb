@@ -2,6 +2,8 @@ require_relative './deck'
 
 class Pile
   
+  attr_reader :deck, :played_cards, :current_suit, :current_value
+  
   def initialize(deck=Deck.new)
     @deck = deck
     @played_cards = @deck.deal(1)
@@ -9,9 +11,22 @@ class Pile
     @current_value = @played_cards.first.value
   end
   
-  def return
+  def return_to_deck
     @deck.return(@played_cards)
-    self = Pile.new(@deck)
+    Pile.new(@deck)
+  end
+  
+  def valid_play?(card)
+    card.suit == @current_suit || 
+    card.value == @current_value ||
+    card.value == :eight
+  end
+  
+  def play(card, suit=card.suit)
+    raise "invalid play" if !valid_play?(card)
+    @played_cards << card
+    @current_suit = suit
+    @current_value = card.value
   end
   
 end
