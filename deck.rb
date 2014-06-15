@@ -20,4 +20,17 @@ class Deck
     hand
   end
   
+  def return(pile)
+    @cards += pile
+    @cards.shuffle!
+  end
+  
+  def count
+    @cards.count
+  end
+  
+  def empty?
+    @cards.empty?
+  end
+  
 end
