@@ -13,7 +13,7 @@ class Pile
   
   def return_to_deck
     @deck.return(@played_cards)
-    Pile.new(@deck)
+    initialize(@deck)
   end
   
   def valid_play?(card)
@@ -27,6 +27,7 @@ class Pile
     @played_cards << card
     @current_suit = suit
     @current_value = card.value
+    nil
   end
   
 end
